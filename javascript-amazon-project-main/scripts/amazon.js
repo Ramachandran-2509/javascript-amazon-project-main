@@ -1,3 +1,4 @@
+// we develop here generate html code and loop through our product display in html
 const products=[{
   image: 'images/products/athletic-cotton-socks-6-pairs.jpg' ,
   name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
@@ -91,3 +92,7 @@ products.forEach((product)=>{
  console.log(ProductsHtml)
 
  document.querySelector(".js-products-grid").innerHTML=ProductsHtml;
+
+
+
+ //
