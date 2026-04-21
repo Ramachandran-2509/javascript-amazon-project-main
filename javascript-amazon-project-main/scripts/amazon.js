@@ -52,7 +52,7 @@ products.forEach((product)=>{
             Added</img>
           </div>
 
-          <button class="add-to-cart-button button-primary" type="button">
+          <button class="add-to-cart-button button-primary js-add-to-cart"   data-product-id="${product.id} "type="button">
             Add to Cart
           </button>
         </div>`
@@ -60,10 +60,40 @@ products.forEach((product)=>{
        
 })
 
- console.log(ProductsHtml)
+
+// data-product-name it's data attribute for it's represent which button we clicked and we know product details that's reason we add data attribute
+
 
  document.querySelector(".js-products-grid").innerHTML=ProductsHtml;
 
+  document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
+    button.addEventListener('click', ()=>{
+      
+      const productID= button.dataset.productID;
 
 
- //
+      let matchingItem; 
+
+      cart.forEach((item)=>{
+          if(productID===item.productID){
+            matchingItem=item 
+          }
+      })
+      
+        if(matchingItem){
+          matchingItem.quantity+=1
+        }
+        else{
+          cart.push({
+          productID: productID,
+          quantity: 1
+        })
+        }
+    console.log(cart)
+
+
+  })
+ })
+
+
+
