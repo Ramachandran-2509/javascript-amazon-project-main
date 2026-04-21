@@ -89,7 +89,19 @@ products.forEach((product)=>{
           quantity: 1
         })
         }
-    console.log(cart)
+
+// now we can add quantity and display in cart section
+
+    let cartQuantity=0
+
+    cart.forEach((item)=>{
+        cartQuantity += item.quantity
+    })
+
+
+    document.querySelector(".js-cart-quanitity").innerHTML=cartQuantity  
+
+   
 
 
   })
