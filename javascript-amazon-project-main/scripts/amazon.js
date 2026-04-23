@@ -1,7 +1,5 @@
-// we develop here generate html code and loop through our product display in html
+import {cart} from '../data/cart.js';
 
-
-// products came form data/product.js
 
 let ProductsHtml ='';    // accumulator pattern
 
