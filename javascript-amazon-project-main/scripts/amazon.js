@@ -1,11 +1,10 @@
-import {cart} from '../data/cart.js';
-import {products} from '../data/products.js'
+import { cart, addcart } from "../data/cart.js";
+import { products } from "../data/products.js";
 
-let ProductsHtml ='';    // accumulator pattern
+let ProductsHtml = ""; // accumulator pattern
 
-products.forEach((product)=>{
-
- ProductsHtml+=`
+products.forEach((product) => {
+  ProductsHtml += `
    <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -25,7 +24,7 @@ products.forEach((product)=>{
           </div>
 
           <div class="product-price">
-            $${(product.priceCents /100).toFixed(2)}
+            $${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -53,57 +52,34 @@ products.forEach((product)=>{
           <button class="add-to-cart-button button-primary js-add-to-cart"   data-product-id="${product.id} "type="button">
             Add to Cart
           </button>
-        </div>`
-
-       
-})
-
+        </div>`;
+});
 
 // data-product-name it's data attribute for it's represent which button we clicked and we know product details that's reason we add data attribute
 
-
- document.querySelector(".js-products-grid").innerHTML=ProductsHtml;
-
-  document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
-    button.addEventListener('click', ()=>{
-      
-      const productID= button.dataset.productID;
+document.querySelector(".js-products-grid").innerHTML = ProductsHtml;
 
 
-      let matchingItem; 
+function updateQuantityCart(){
+   let cartQuantity = 0;
 
-      cart.forEach((item)=>{
-          if(productID===item.productID){
-            matchingItem=item 
-          }
-      })
-      
-        if(matchingItem){
-          matchingItem.quantity+=1
-        }
-        else{
-          cart.push({
-          productID: productID,
-          quantity: 1
-        })
-        }
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
 
-// now we can add quantity and display in cart section
+    document.querySelector(".js-cart-quanitity").innerHTML = cartQuantity;
+}
 
-    let cartQuantity=0
-
-    cart.forEach((item)=>{
-        cartQuantity += item.quantity
-    })
-
-
-    document.querySelector(".js-cart-quanitity").innerHTML=cartQuantity  
-
+document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productID = button.dataset.productID;
    
 
+    addcart(productID)
 
-  })
- })
+    // now we can add quantity and display in cart section
 
+   displayQuantityCart()
 
-
+  });
+});
