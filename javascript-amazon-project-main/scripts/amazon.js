@@ -1,5 +1,6 @@
 import { cart, addcart } from "../data/cart.js";
 import { products } from "../data/products.js";
+import { formatCurreny } from "./utils/money.js";
 
 let ProductsHtml = ""; // accumulator pattern
 
@@ -24,7 +25,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${(product.priceCents / 100).toFixed(2)}
+            $${formatCurreny(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
@@ -49,7 +50,8 @@ products.forEach((product) => {
             Added</img>
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart"   data-product-id="${product.id} "type="button">
+          <button class="add-to-cart-button button-primary js-add-to-cart"   data-product-id=
+          "${product.id}">
             Add to Cart
           </button>
         </div>`;
@@ -67,19 +69,20 @@ function updateQuantityCart(){
       cartQuantity += cartItem.quantity;
     });
 
-    document.querySelector(".js-cart-quanitity").innerHTML = cartQuantity;
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 }
+
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
-    const productID = button.dataset.productID;
+    const productId = button.dataset.productId;
    
 
-    addcart(productID)
+    addcart(productId)
 
     // now we can add quantity and display in cart section
 
-   displayQuantityCart()
+   updateQuantityCart()
 
   });
 });
