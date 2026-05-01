@@ -1,6 +1,7 @@
 import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
 import { products,getProduct } from "../../data/products.js";
 import { formatCurreny } from "../utils/money.js";
+import {renderPaymentSummary} from "./paymentSummary.js";
 
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions, getDeliveryOption} from "../../data/deliveryOptions.js";
@@ -137,6 +138,8 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
       `.js-cart-item-container-${productId}`,
     );
     container.remove();
+
+    renderPaymentSummary() // re-render payment summary after removing item from cart
   });
 });
 
@@ -145,6 +148,7 @@ document.querySelectorAll(".js-delivery-option").forEach((element) => {
     const { productId, deliveryOptionId } = element.dataset;
     updateDeliveryOption(productId, deliveryOptionId);
     renderorderSummary()  // this will re-render the order summary with the updated delivery option
+    renderPaymentSummary() // this will re-render the payment summary with the updated delivery option
   });
 });
 
