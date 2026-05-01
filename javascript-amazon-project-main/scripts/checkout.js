@@ -10,6 +10,8 @@ import { deliveryOptions } from "../data/deliveryOptions.js";
 
 // console.log(res.format('dddd, MMMM D'))
 
+function renderorderSummary() {
+
 let orderSummaryHtml = "";
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
@@ -151,5 +153,10 @@ document.querySelectorAll(".js-delivery-option").forEach((element) => {
   element.addEventListener("click", () => {
     const { productId, deliveryOptionId } = element.dataset;
     updateDeliveryOption(productId, deliveryOptionId);
+    renderorderSummary()  // this will re-render the order summary with the updated delivery option
   });
 });
+
+
+}
+renderorderSummary()
