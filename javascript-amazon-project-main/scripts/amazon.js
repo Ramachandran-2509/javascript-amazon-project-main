@@ -1,6 +1,7 @@
-import { cart, addcart } from "../data/cart.js";
+import { cart, addcart,calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurreny } from "./utils/money.js";
+// import {updateCartQuantity} from "../checkout/orderSummary.js"
 
 let ProductsHtml = ""; // accumulator pattern
 
@@ -70,7 +71,18 @@ function updateQuantityCart(){
     });
 
     document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+    // updateCartQuantity() // update cart quantity in header after adding item to cart
 }
+
+
+ function updateCartQuantity() {
+let cartQuantity= calculateCartQuantity() // calculate total quantity of items in cart  ;
+
+
+document.querySelector(".js-cart-quantity").textContent = cartQuantity
+
+}
+updateCartQuantity()
 
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
