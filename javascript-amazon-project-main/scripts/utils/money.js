@@ -3,7 +3,7 @@ export function formatCurreny(priceCents){
   
 }
 
-console.log(formatCurreny(12500000.00))
+// console.log(formatCurreny(12500000.00))
 
 
 
