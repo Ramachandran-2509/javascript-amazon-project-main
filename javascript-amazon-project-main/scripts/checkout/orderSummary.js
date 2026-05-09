@@ -55,7 +55,7 @@
                 ${MatchingProduct.name}
                   </div>
                   <div class="product-price">
-                    $${formatCurreny(MatchingProduct.priceCents)}
+                    ${MatchingProduct.getPrice()}
                   </div>
                   <div class="product-quantity
                     js-product-quantity-${MatchingProduct.id}
@@ -160,7 +160,7 @@
       });
     });
 
-    function updateCartQuantity() {
+     function updateCartQuantity() {
       let cartQuantity = calculateCartQuantity();
 
       document.querySelector(".js-return-to-home-link").textContent =

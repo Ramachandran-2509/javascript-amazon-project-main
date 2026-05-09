@@ -1,4 +1,4 @@
-import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
+import { cart, removeFromCart, updateDeliveryOption,calculateCartQuantity } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurreny } from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption} from "../../data/deliveryOptions.js";
@@ -44,7 +44,7 @@ export function renderPaymentSummary(){
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div class="js-count-items">Items (3):</div>
             <div class="payment-summary-money">$${result}</div>
           </div>
 
@@ -73,4 +73,15 @@ export function renderPaymentSummary(){
           </button>
   `
   document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHtml;
+
+
+  // we update count order summary and payment summary when we click on update link in order summary
+    function updateItemQuantity() {
+        let cartQuantity = calculateCartQuantity();
+  
+        document.querySelector(".js-count-items").textContent =
+          `items (${cartQuantity})`;
+      }
+      updateItemQuantity();
+
 }
