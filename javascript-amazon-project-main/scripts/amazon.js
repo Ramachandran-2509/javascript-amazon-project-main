@@ -30,7 +30,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-quantity-container">
-            <select aria-label="Quantity">
+            <select class="js-quantity-selector-${product.id}" aria-label="Quantity">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -43,6 +43,8 @@ products.forEach((product) => {
               <option value="10">10</option>
             </select>
           </div>
+
+          ${product.extraInfoHTML()}  
 
           <div class="product-spacer"></div>
 
@@ -89,8 +91,17 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
    
+    const quantitySelector = document.querySelector(
+      `.js-quantity-selector-${productId}`
+    );
 
-    addcart(productId)
+    const quantity = Number(quantitySelector.value);
+
+    console.log(quantity);
+
+    addcart(productId, quantity); // add product to cart with specific quantity
+    
+    console.log(cart)
 
     // now we can add quantity and display in cart section
 
