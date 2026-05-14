@@ -61,6 +61,11 @@ class Clothing extends product{
 
 }
 
+// const date = new Date()
+// console.log(date)
+// console.log(date.toLocaleDateString())
+
+
 
 
 export const products = [
@@ -729,3 +734,21 @@ export const products = [
   return new product(productDetails)
 })
 
+
+
+  // const obj3={
+  //   name:'Tammy',
+  //   method(){
+  //     console.log(this.name)
+
+  //     const y=()=>{
+  //       console.log(this.name)
+  //     }
+
+  //     y()
+     
+
+  //   }
+  // }
+
+  // obj3.method()
