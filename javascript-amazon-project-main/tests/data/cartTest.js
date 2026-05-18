@@ -1,4 +1,5 @@
 import { addcart, cart, loadFromStorage } from "../../data/cart.js";
+// import { loadProducts } from "../../data/products.js";
 
 describe("test suite: addToCart", () => {
   it("adds an existing item to the cart and updates quantity", () => {
@@ -15,7 +16,7 @@ describe("test suite: addToCart", () => {
 
     loadFromStorage();
 
-    addcart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+    addcart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6", 1);
     expect(cart.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
@@ -33,7 +34,7 @@ describe("test suite: addToCart", () => {
 
     loadFromStorage();
 
-    addcart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+    addcart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6", 1);
     expect(cart.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
