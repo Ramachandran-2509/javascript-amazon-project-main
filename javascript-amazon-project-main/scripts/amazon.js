@@ -1,7 +1,13 @@
 import { cart, addcart,calculateCartQuantity } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 import { formatCurreny } from "./utils/money.js";
+
 // import {updateCartQuantity} from "../checkout/orderSummary.js"
+
+loadProducts(renderProductsGrid)
+
+function renderProductsGrid(){
+
 
 let ProductsHtml = ""; // accumulator pattern
 
@@ -109,3 +115,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
   });
 });
+
+}
+
