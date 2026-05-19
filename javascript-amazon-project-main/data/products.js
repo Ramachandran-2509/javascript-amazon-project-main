@@ -74,10 +74,12 @@ class Clothing extends product{
 export let products = [];
 
 export function loadProducts(fun){
-  const xhr= new XMLHttpRequest()
+  const xhr = new XMLHttpRequest()
 
   xhr.addEventListener('load',()=>{
-      products = JSON.parse(xhr.response).map((productDetails) => {
+
+    if(xhr.status === 200){
+       products = JSON.parse(xhr.response).map((productDetails) => {
         if(productDetails.type === "clothing"){
           return new Clothing(productDetails)
         }
@@ -86,6 +88,9 @@ export function loadProducts(fun){
       console.log('load products') 
 
          fun()
+    }
+    
+     
   })
 
   xhr.open("GET","https://supersimplebackend.dev/products")
