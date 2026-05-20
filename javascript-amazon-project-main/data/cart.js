@@ -125,13 +125,13 @@ export function updateDeliveryOption(productId, deliveryOptionId){
 
  export function loadCart(){
   const promise = fetch("https://supersimplebackend.dev/cart")
-    .then((response) => response.json())
+    .then((response) => response.text())
     .then((cartData) => {
-      cart = cartData;
-      console.log("load cart");
+      // cart = cartData;
+      console.log(cartData);
     });
 
-    
+    return promise 
 }
 
-loadCart()
+// loadCart()

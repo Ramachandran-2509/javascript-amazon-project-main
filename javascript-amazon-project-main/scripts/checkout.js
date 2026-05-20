@@ -9,16 +9,23 @@ import '../data/backend-pratice.js';
 
 async function loadPage(){
 
-  await loadProductsFetch();
+  try{
+    
+    await loadProductsFetch();
 
-  await loadCart();
+    await loadCart();
+  }
+  catch(error){
+    console.log("error loading products or cart", error)
+  }
+  
 
   // await new Promise((resolve) => {
   //   loadCart(() => {
   //     resolve();
   //   });
   // })
-  
+
   renderorderSummary();
   renderPaymentSummary();
 }

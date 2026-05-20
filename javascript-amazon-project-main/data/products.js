@@ -79,12 +79,17 @@ export function loadProductsFetch() {
       });
       console.log("load products");
       
-    });
+    })
+    // .catch((error)=>{
+    //     console.log("error loading products", error)
+    // })
+
+    // error handling for loadProductsFetch function. if there is an error loading the products, we will log an error message to the console. this will help us identify if there is an issue with loading the products, and we can take appropriate action to fix the issue.
 
     return promise;
 }
 
-loadProductsFetch()
+// loadProductsFetch()
 
 
 
@@ -105,9 +110,16 @@ export function loadProducts(fun) {
     }
   });
 
+  // error handling for loadProducts function. if there is an error loading the products, we will log an error message to the console. this will help us identify if there is an issue with loading the products, and we can take appropriate action to fix the issue.
+  xhr.addEventListener("error", () => {
+    console.log("error loading products");
+  });
+
   xhr.open("GET", "https://supersimplebackend.dev/products");
   xhr.send();
 }
+
+// loadProducts()
 
 // export const products = [
 //   {
