@@ -11,6 +11,9 @@ async function loadPage(){
 
   try{
     
+    // throw 'error1'  
+    // these all manual errors are for testing the error handling of loadPage function. we can uncomment these lines one by one to see how the error handling works. when we throw an error, it will be caught by the catch block, and we will log the error message to the console. this will help us identify if there is an issue with loading the products or cart, and we can take appropriate action to fix the issue.
+
     await loadProductsFetch();
 
     await loadCart();
