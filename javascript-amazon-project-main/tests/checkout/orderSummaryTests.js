@@ -1,6 +1,6 @@
 import { renderorderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProducts, loadProductsFetch } from "../../data/products.js";
 
 
 describe("test suite: renderorderSummary", () => {
@@ -10,11 +10,10 @@ describe("test suite: renderorderSummary", () => {
 /// loadProducts is an asynchronous function. We need to wait for it to finish before running our tests. Otherwise, our tests will run before the products have loaded, and they will fail because they rely on the products being loaded. so we use beforeAll to wait for loadProducts to finish before running our tests. and we call done() to tell Jest that the asynchronous operation is complete and it can proceed with running the tests.
 
   beforeAll((done) =>{
-    loadProducts(()=>{
+    loadProductsFetch().then(()=>{
       done();
-    })
-
-    })
+    });
+  });
 
 
   beforeEach(() => {

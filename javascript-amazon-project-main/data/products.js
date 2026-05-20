@@ -1,7 +1,6 @@
 import { formatCurreny } from "../scripts/utils/money.js";
 
-export function getProduct(productId){
-
+export function getProduct(productId) {
   let MatchingProduct;
 
   products.forEach((product) => {
@@ -9,18 +8,17 @@ export function getProduct(productId){
       MatchingProduct = product;
     }
   });
-  return MatchingProduct
+  return MatchingProduct;
 }
 
-
-class product{
+class product {
   id;
   image;
   name;
   rating;
   priceCents;
 
-  constructor(productDetails){
+  constructor(productDetails) {
     this.id = productDetails.id;
     this.image = productDetails.image;
     this.name = productDetails.name;
@@ -28,38 +26,34 @@ class product{
     this.priceCents = productDetails.priceCents;
   }
 
-  getStarsUrl(){
-    return `images/ratings/rating-${this.rating.stars * 10}.png`
+  getStarsUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
 
-  getPrice(){
-    return `$${formatCurreny(this.priceCents)}`
+  getPrice() {
+    return `$${formatCurreny(this.priceCents)}`;
   }
 
-  extraInfoHTML(){
-    return " "
+  extraInfoHTML() {
+    return " ";
   }
-
 }
 
-class Clothing extends product{
-
+class Clothing extends product {
   sizeChartLink;
 
-  constructor(productDetails){
-
-    super(productDetails)
+  constructor(productDetails) {
+    super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
   }
 
-  extraInfoHTML(){
+  extraInfoHTML() {
     return `
     <div class="size-chart-link-container">
       <a href="${this.sizeChartLink}" target="_blank" class="size-chart-link">Size Chart</a>
     </div>
-    `
+    `;
   }
-
 }
 
 // const date = new Date()
@@ -73,34 +67,47 @@ class Clothing extends product{
 
 export let products = [];
 
-export function loadProducts(fun){
-  const xhr = new XMLHttpRequest()
-
-  xhr.addEventListener('load',()=>{
-
-    if(xhr.status === 200){
-       products = JSON.parse(xhr.response).map((productDetails) => {
-        if(productDetails.type === "clothing"){
-          return new Clothing(productDetails)
+export function loadProductsFetch() {
+  const promise= fetch("https://supersimplebackend.dev/products")
+    .then((response) => response.json())
+    .then((productData) => {
+      products = productData.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
         }
-        return new product(productDetails)
-      } )
-      console.log('load products') 
+        return new product(productDetails);
+      });
+      console.log("load products");
+      
+    });
 
-         fun()
-    }
-    
-     
-  })
-
-  xhr.open("GET","https://supersimplebackend.dev/products")
-  xhr.send() 
-
- 
+    return promise;
 }
 
+loadProductsFetch()
 
 
+
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    if (xhr.status === 200) {
+      products = JSON.parse(xhr.response).map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        }
+        return new product(productDetails);
+      });
+      console.log("load products");
+
+      fun();
+    }
+  });
+
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
 
 // export const products = [
 //   {
@@ -768,21 +775,18 @@ export function loadProducts(fun){
 //   return new product(productDetails)
 // })
 
+// const obj3={
+//   name:'Tammy',
+//   method(){
+//     console.log(this.name)
 
+//     const y=()=>{
+//       console.log(this.name)
+//     }
 
-  // const obj3={
-  //   name:'Tammy',
-  //   method(){
-  //     console.log(this.name)
+//     y()
 
-  //     const y=()=>{
-  //       console.log(this.name)
-  //     }
+//   }
+// }
 
-  //     y()
-     
-
-  //   }
-  // }
-
-  // obj3.method()
+// obj3.method()
