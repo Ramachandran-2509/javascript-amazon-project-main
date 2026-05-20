@@ -1,10 +1,15 @@
 import { cart, addcart,calculateCartQuantity } from "../data/cart.js";
-import { products, loadProducts } from "../data/products.js";
+import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 import { formatCurreny } from "./utils/money.js";
 
 // import {updateCartQuantity} from "../checkout/orderSummary.js"
 
-loadProducts(renderProductsGrid)
+loadProductsFetch().then(renderProductsGrid)
+
+// loadProducts(renderProductsGrid) 
+
+// we can pass renderProductsGrid as callback function to loadProducts because loadProducts is an asynchronous function and we need to wait for it to finish before rendering the products grid. otherwise, we will try to render the products grid before the products have loaded, and we will get an error because the products are not available yet. by using a callback function, we can ensure that we only try to render the products grid after the products have loaded successfully. if there is an error loading the products, we can catch that error and handle it appropriately.
+
 
 function renderProductsGrid(){
 
